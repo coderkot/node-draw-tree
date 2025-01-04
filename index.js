@@ -61,7 +61,10 @@ function traverseTree(tree, index = 1) {
     return result
 }
 
-function drawTree(treeData) {
+function drawTree(treeData = {}) {
+    if (typeof treeData !== 'object' || Array.isArray(treeData)) throw new Error("Invalid data")
+    if (treeData === null || Object.keys(treeData).length === 0) throw new Error("Empty data")
+
     const tree = traverseTree(treeData)
     let result = ''
 
@@ -72,4 +75,7 @@ function drawTree(treeData) {
     return result
 }
 
-console.log(drawTree(data))
+module.exports = {
+    data: data,
+    drawTree: drawTree,
+}
